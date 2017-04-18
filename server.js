@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser');
 var fs = require('fs');
 
 ///// CONFIGURATIONS ///////////////////////////
-var config = require('./Config/config.js');
+var config = require('./Config/Config.js');
 
 // declaring routes
 var loginRoute = require('./Routes/LoginRoute');
@@ -28,14 +28,13 @@ app.use('/user', loginRoute);
 
 
 // start http server
-//app.listen(app.get('port'), app.get('address'), function () {
-    //console.log(" Server started at port: " + app.get('port'));
-    //console.log(" Go to: https:// " + app.get('address') + ":" + app.get('port') + "App/Views/Login/Login.html");
-//});
+app.listen(app.get('port'), app.get('address'), function() {
+  console.log(" Server started... ");
+});
 
-https.createServer({
-    key: fs.readFileSync('./Cert/key.pem'),
-    cert: fs.readFileSync('./Cert/cert.pem')
-}, app).listen(443);
+//https.createServer({
+//    key: fs.readFileSync('./Cert/key.pem'),
+//    cert: fs.readFileSync('./Cert/cert.pem')
+//}, app).listen(443);
 
 
