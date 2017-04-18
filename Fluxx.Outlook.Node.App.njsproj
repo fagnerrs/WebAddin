@@ -30,11 +30,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Config\Config.js" />
+    <Compile Include="Routes\LoginRoute.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="server.js" />
     <Content Include="..\Fluxx.Outlook.WebSync\Fluxx.Outlook.WebSyncManifest\Fluxx.Outlook.WebSync.xml">
       <Link>Manifest\Fluxx.Outlook.WebSync.xml</Link>
     </Content>
     <None Include="OutlookNodePublish.pubxml" />
+    <Content Include="Cert\cert.pem" />
+    <Content Include="Cert\key.pem" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
@@ -42,6 +47,8 @@
     <Folder Include="Manifest\" />
     <Folder Include="Config\" />
     <Folder Include="App\" />
+    <Folder Include="Cert\" />
+    <Folder Include="Routes\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
