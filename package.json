@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Fluxx.Outlook.Node.App",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
   "author": {
     "name": "Fagner"
   },
