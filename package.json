@@ -1,0 +1,12 @@
+{
+  "name": "fluxx.outlook.node.app",
+  "version": "0.0.0",
+  "description": "Fluxx.Outlook.Node.App",
+  "main": "server.js",
+  "author": {
+    "name": "Fagner"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
