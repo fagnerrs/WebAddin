@@ -13,8 +13,13 @@
     <!-- <script src="Scripts/Office/MicrosoftAjax.js" type="text/javascript"></script>  -->
     <!-- <script src="Scripts/Office/1/office.js" type="text/javascript"></script>  -->
 
+    <script src="../../Scripts/StorageLibrary.js" type="text/javascript"></script>
+    <script src="../../Scripts/UrlServices.js" type="text/javascript"></script>
+    <script src="../../Model/EmailModel.js" type="text/javascript"></script>
+
     <script src="EmailSync.js" type="text/javascript"></script>
-    <link href="EmailSync.css" type="text/css" rel="stylesheet"/>
+    <link href="EmailSync.css" type="text/css" rel="stylesheet" />
+    <link href="../../Content/style.css" rel="stylesheet" />
 
     <!-- For the Office UI Fabric, go to https://aka.ms/office-ui-fabric to learn more. -->
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.2.0/css/fabric.min.css" />
@@ -24,125 +29,73 @@
     <!-- To enable the offline use of Office UI Fabric, use: -->
     <!-- link rel="stylesheet" href="Content/fabric.min.css" -->
     <!-- link rel="stylesheet" href="Content/fabric.components.min.css" -->
+
 </head>
 <body>
-    <div id="content-header">
-        <div class="padding">
+
+    <div id="content" class="ms-Grid" style="display:none;">
+  
+       
+        <!--<div class="ms-Grid-row">
+            <button id="btn-emailSync" class="ms-Button ms-Button--primary" style="display:none;"><span class="ms-Button-label">Sync With Fluxx</span></button>
             <img src="..\..\Images\fluxx_32x32.png" />
-            <button id="button-signin" class="ms-Button ms-Button--primary"><span class="ms-Button-label">Sync With Fluxx</span></button>
+            <label class="ms-font-xxl">Save to Fluxx</label>
+        </div> -->
+
+        <div class="ms-Grid-row">
+            <div class="ms-SearchBox ms-SearchBox--commandBar" style="width:100%;">
+                <input class="ms-SearchBox-field" type="text" value="">
+                <label class="ms-SearchBox-label">
+                    <i class="ms-SearchBox-icon ms-Icon ms-Icon--Search"></i>
+                    <span class="ms-SearchBox-text">Search</span>
+                </label>
+                <div class="ms-CommandButton ms-SearchBox-clear ms-CommandButton--noLabel">
+                    <button class="ms-CommandButton-button">
+                        <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Clear"></i></span>
+                        <span class="ms-CommandButton-label"></span>
+                    </button>
+                </div>
+                <div class="ms-CommandButton ms-SearchBox-exit ms-CommandButton--noLabel">
+                    <button class="ms-CommandButton-button">
+                        <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--ChromeBack"></i></span>
+                        <span class="ms-CommandButton-label"></span>
+                    </button>
+                </div>
+                <div class="ms-CommandButton ms-SearchBox-filter ms-CommandButton--noLabel">
+                    <button class="ms-CommandButton-button">
+                        <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Filter"></i></span>
+                        <span class="ms-CommandButton-label"></span>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="ms-SearchBox ms-SearchBox--commandBar" style="width:100%;">
-            <input class="ms-SearchBox-field" type="text" value="">
-            <label class="ms-SearchBox-label">
-                <i class="ms-SearchBox-icon ms-Icon ms-Icon--Search"></i>
-                <span class="ms-SearchBox-text">Search</span>
-            </label>
-            <div class="ms-CommandButton ms-SearchBox-clear ms-CommandButton--noLabel">
-                <button class="ms-CommandButton-button">
-                    <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Clear"></i></span>
-                    <span class="ms-CommandButton-label"></span>
-                </button>
-            </div>
-            <div class="ms-CommandButton ms-SearchBox-exit ms-CommandButton--noLabel">
-                <button class="ms-CommandButton-button">
-                    <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--ChromeBack"></i></span>
-                    <span class="ms-CommandButton-label"></span>
-                </button>
-            </div>
-            <div class="ms-CommandButton ms-SearchBox-filter ms-CommandButton--noLabel">
-                <button class="ms-CommandButton-button">
-                    <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Filter"></i></span>
-                    <span class="ms-CommandButton-label"></span>
-                </button>
-            </div>
+        <div class="ms-Grid-row">
+            <label id="user-name" class="ms-font-xl" style="padding:0px; width:100%"></label>
+        </div>
+        <div class="ms-Grid-row">
+            <label id="user-address" class="ms-font-m" style="padding:0px;"></label>
+        </div>
+        <div class="ms-Grid-row">
+            <label id="user-organization" class="ms-font-m" style="padding:0px;"></label>
+        </div>
+        <div id="org-container" class="ms-Grid-row" style="margin-top:20px;">
+        </div>
+
+        <div class="ms-Grid-row">
+            <a id="logout" href="#" style="position:absolute; top:0px; right:10px;">Logout</a>
         </div>
     </div>
 
-
-    <div id="content-main" class="ms-Grid">
-        
-        <div class="ms-Grid">
-            <div class="ms-Grid-row">
-                <label class="ms-Label ms-font-m-plus" style="padding:0px;">Amy Vollanova</label>
-            </div>
-            <div class="ms-Grid-row">
-                <label class="ms-Label ms-font-m" style="padding:0px;">San Francisco, CA, USA</label>
-            </div>
-            <div class="ms-Grid-row">
-                <label class="ms-Label ms-font-m" style="padding:0px;">ABC Organizarion</label>
-            </div>
-            <div class="ms-Grid-row" style="margin-top:10px;">
-
-                <button class="accordion ms-font-m-plus">Related Grants</button>
-                <div class="panel">
-                   
-                    <ul>
-                        <li class="ms-ListItem ms-ListItem--image" style="margin-left:5px; padding-left:0px;" tabindex="0">
-                       
-                            <span class="ms-ListItem-primaryText">ABC Grant</span>
-                            <span class="ms-ListItem-secondaryText">G-1234-1234</span>
-
-                            <div class="ms-ListItem-actions">
-                                <div class="ms-ListItem-action">
-                                    <i class="ms-Icon ms-Icon--Mail"></i>
-                                </div>
-                                <div class="ms-ListItem-action">
-                                    <i class="ms-Icon ms-Icon--Delete"></i>
-                                </div>
-                                <div class="ms-ListItem-action">
-                                    <i class="ms-Icon ms-Icon--Flag"></i>
-                                </div>
-                                <div class="ms-ListItem-action">
-                                    <i class="ms-Icon ms-Icon--Pinned"></i>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                </div>
-
-                <button class="accordion ms-font-m-plus">Related Requests</button>
-                <div class="panel">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-
-            </div>
+    <div id="spinner" class="ms-Spinner ms-Spinner--large center">
+        <div class="ms-Spinner-label">
+            Loading...
         </div>
-
     </div>
 
-    <script type="text/javascript">
-
-        // -------
-        var SearchBoxElements = document.querySelectorAll(".ms-SearchBox");
-        for (var i = 0; i < SearchBoxElements.length; i++) {
-            new fabric['SearchBox'](SearchBoxElements[i]);
-        }
-
-
-        // --------
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].onclick = function () {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            }
-        }
-
-        //--------
-        var ListItemElements = document.querySelectorAll(".ms-ListItem");
-        for (var i = 0; i < ListItemElements.length; i++) {
-            new fabric['ListItem'](ListItemElements[i]);
-        }
-
+    <script>
+        var spinnerElement = $("#spinner").get(0);
+        new fabric['Spinner'](spinnerElement);
     </script>
 
 </body>

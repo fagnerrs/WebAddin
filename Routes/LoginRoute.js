@@ -1,25 +1,33 @@
 ﻿var express = require('express');
+var UserModel = require('../Model/UserModel');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('getting');
-});
+var users = new UserModel().getUsers();
 
-router.post('/register', function (req, res) {
-    res.send('registering');
-});
+router.get('/:username/:password', function (req, res, next) {
+    var success = false;
+    users.forEach(function (value) {
+        if (req.params.username == value.email && req.params.password == value.password) {
+            success = true;
+        }
+    });
 
-/* params
-   Content-Type: application/json 
-   body: { "Username":"user@fluxx.io", "Password":"" } */
-router.post('/login', function (req, res, next) {
-    
-    res.send('Username: ' + req.body.Username);
-});
+    if (!success) {
+        console.log("User not found: " + req.params.username);
+        res.send({
+            "error": "User undefined",
+            "success": false
+        });
+    }
+    else {
+        console.log("Login success: " + req.params.username);
+        res.send({
+            "access_token": "ABE421111",
+            "success": true
+        });
+    }
 
-router.get('/logout', function (req, res) {
-    res.send('logout');
+    res.end();
 });
 
 module.exports = router;

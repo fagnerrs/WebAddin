@@ -1,16 +1,41 @@
 ﻿(function () {
     "use strict";
 
-    // The Office initialize function must be run each time a new page is loaded.
     Office.initialize = function (reason) {
-        $(document).ready(function () {
 
-            console.log("passou aqui...");
+        var myInfo = Office.context.mailbox.userProfile;
+        var token = StorageLibrary.getFromLocalStorage(myInfo.emailAddress);
 
-            $("#button-signin").click(function (a) {
-                window.location.assign(window.location.origin + "/App/Views/EmailSync/EmailSync.html");
+        if (token != null && token != "") {
+            window.location.assign(window.location.origin + "/App/Views/EmailSync/EmailSync.html");
+        }
+        else {
+            $(document).ready(function () {
+
+                $("#spinner").css("display", "none");
+                $("#content").css("display", "inline");
+
+                $("#button-signin").click(function () {
+
+                    var userName = $("#userName").val();
+                    var password = $("#password").val();
+
+                    var url = UrlServices.login(encodeURIComponent(userName), encodeURIComponent(password));
+
+                    $.getJSON(url, {})
+                        .done(function (json) {
+                            if (json.success == true) {
+                                StorageLibrary.saveToLocalStorage(myInfo.emailAddress, json.access_token);
+                                window.location.assign(window.location.origin + "/App/Views/EmailSync/EmailSync.html");
+                            }
+                        })
+                        .fail(function (jqxhr, textStatus, error) {
+                            var err = textStatus + ", " + error;
+                            console.log("Request Failed: " + err);
+                        });
+                });
             });
-
-        });
+        }
     };
+
 })();
