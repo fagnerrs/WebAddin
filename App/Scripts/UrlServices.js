@@ -2,18 +2,20 @@
 
     var self = {};
 
+    //var origin = "https://localhost:3000"; // Local
+    var origin = window.location.origin; // Prod
+
+
     self.login = function (userName, password) {
-        return "https://localhost:3000/login/" + userName + "/" + password;
-        //return "/login/" + userName + "/" + password;
+        return origin + "/login/" + userName + "/" + password;
     }
 
     self.getOrganizations = function (messageId) {
-        return "https://localhost:3000" + "/organization/message/" + messageId;
-        //return  "/grantsemail/message/ " + messageInfo.itemId;
+        return origin + "/organization/message/" + messageId;
     }
 
     self.emailUpload = function (organizationId) {
-        return "https://localhost:3000" + "/organization/" + organizationId + "/email";
+        return origin + "/organization/" + organizationId + "/email";
     }
 
     return self;
