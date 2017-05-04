@@ -27,16 +27,16 @@ app.use('/login', loginRoute);
 app.use('/organization', grantsEmailRoute);
 
 // start http server
-// app.listen(app.get('port'), app.get('address'), function () {
-   // console.log(" Server started at port: " + app.get('port'));
-//});
+app.listen(app.get('port'), app.get('address'), function () {
+    console.log(" Server started at port: " + app.get('port'));
+});
 
-
+/*
 var options = {
     key: fs.readFileSync('./Cert/key.pem'),
     cert: fs.readFileSync('./Cert/cert.pem')
 };
 
 // start https server
-https.createServer(options, app).listen(3000);
+https.createServer(options, app).listen(3000); */
 
