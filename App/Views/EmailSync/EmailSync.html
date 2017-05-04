@@ -15,7 +15,10 @@
 
     <script src="../../Scripts/StorageLibrary.js" type="text/javascript"></script>
     <script src="../../Scripts/UrlServices.js" type="text/javascript"></script>
+    <script src="../../Scripts/Utils.js" type="text/javascript"></script>
+
     <script src="../../Model/EmailModel.js" type="text/javascript"></script>
+    <script src="Login.js" type="text/javascript"></script>
 
     <script src="EmailSync.js" type="text/javascript"></script>
     <link href="EmailSync.css" type="text/css" rel="stylesheet" />
@@ -87,15 +90,13 @@
         </div>
     </div>
 
-    <div id="spinner" class="ms-Spinner ms-Spinner--large center">
-        <div class="ms-Spinner-label">
-            Loading...
-        </div>
-    </div>
+    <div id="spinner" class="ms-Spinner ms-Spinner--large" style="width:32px;" />
 
     <script>
         var spinnerElement = $("#spinner").get(0);
         new fabric['Spinner'](spinnerElement);
+
+        Utils.centralizeElement("spinner");
     </script>
 
 </body>
