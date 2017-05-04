@@ -11,7 +11,7 @@
     }
 
     self.getOrganizations = function (messageId) {
-        return origin + "/organization/message/" + messageId;
+        return origin + "/organization/message?id=" + messageId;
     }
 
     self.emailUpload = function (organizationId) {

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/message/:id', function (req, res, next) {
-    console.log("message id: " + req.params.id);
+router.get('/message/', function (req, res, next) {
+    console.log("message id: " + req.query.id);
     res.send({
         "success": true, "data": [
             {
